@@ -3,6 +3,8 @@ import pandas as pd
 ######################################
 # Step 1: Monsoon data preprocessing #
 ######################################
+
+#### adjust the files range here
 for i in range(6):
     read_file_name = f"HV Output{i}.csv"
     write_file_name = f"monsoon_data{i}(adding power and energy).csv"
@@ -45,6 +47,8 @@ for i in range(6):
 ##################################################
 # Step 2: Merge monsoon data and experiment data #
 ##################################################
+
+#### adjust the files range here
 for i in range(6):
     monsoon_file_name = f"monsoon_data{i}(adding power and energy).csv"
     experiment_file_pathname = f"experiments{i}/new_runner_experiment/run_table{i}.csv"
@@ -59,6 +63,9 @@ for i in range(6):
         # find the start/end timestamp of one program experiment
         start_time = row1["start_time"]
         end_time = row1["end_time"]
+        start_time = float(row1["start_time"])
+        end_time = float(row1["end_time"])
+
         # the index of the matching start/end timestamp in monsoon data
         idx_start = 0
         idx_end = 0
@@ -67,6 +74,7 @@ for i in range(6):
         # iterate over the monsoon data, find the matching timestamp
         for index2, row2 in monsoon_data.iterrows():
             current_time = row2["Time(ms)"]
+
             if start_time >= last_current_time and start_time <= current_time:
                 idx_start = (
                     index2
@@ -100,8 +108,10 @@ for i in range(6):
 
 
 ##################################################
-# Step 3: Merge 6 experiment result file         #
+# Step 3: Merge experiment result file         #
 ##################################################
+
+
 def merge_tables(file_list):
     merged_df = pd.read_csv(file_list[0])
     for file in file_list[1:]:
@@ -112,12 +122,9 @@ def merge_tables(file_list):
 
 
 files = [
-    "merged_result0.csv",
-    "merged_result1.csv",
-    "merged_result2.csv",
-    "merged_result3.csv",
-    "merged_result4.csv",
-    "merged_result5.csv",
+    "xxx.csv",
+    "xxx.csv",
+    "xxxx.csv",
 ]
 
 merged_df = merge_tables(files)

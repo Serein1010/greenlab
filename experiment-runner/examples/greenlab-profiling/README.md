@@ -2,7 +2,7 @@
 
 ## Configurations
 
-Please add a file named `fabconfig.yaml` to `experiment-runner` folder with the following content:
+Please add a file named `fabconfig.yml` to `experiment-runner` folder with the following content:
 
 ```yaml
 hosts:
@@ -112,9 +112,50 @@ The necessary dependencies and their corresponding installation derivatives on R
   g++ revcomp.cpp -o revcomp -O3
   ```
 
+- Enter the `~/xxx/xxx/codes/handwritten` folder and run the following command to compile the Java codes:
+
+  ```shell
+  javac binarytrees.java
+  javac fasta.java
+  javac regexredux.java
+  javac spectralnorm.java
+  javac revcomp.java
+  ```
+
+- Enter the `~/xxx/xxx/codes/gpt` folder and run the following command to compile the Java codes:
+
+  ```shell
+  javac binarytrees.java
+  javac fasta.java
+  javac regexredux.java
+  javac spectralnorm.java
+  javac revcomp.java
+  ```
+
+- Enter the `~/xxx/xxx/codes/handwritten` folder and run the following command to compile the C codes:
+
+  ```shell
+  gcc fasta.c -o fasta.compiled
+  gcc knucleotide.c -o knucleotide.compiled
+  gcc pidigits.c -o pidigits.compiled -lgmp -lm
+  gcc -pipe -Wall -O3 -fomit-frame-pointer nbody.c -o nbody.compiled -lm
+  gcc -pipe -Wall -O3 -fomit-frame-pointer -fopenmp spectralnorm.c -o spectralnorm.compiled -lm
+  ```
+
+- Enter the `~/xxx/xxx/codes/gpt` folder and run the following command to compile the C codes:
+
+  ```shell
+  gcc fasta.c -o fasta.compiled
+  gcc knucleotide.c -o knucleotide.compiled
+  gcc pidigits.c -o pidigits.compiled -lgmp -lm
+  gcc -pipe -Wall -O3 -fomit-frame-pointer nbody.c -o nbody.compiled -lm
+  gcc -pipe -Wall -O3 -fomit-frame-pointer -fopenmp spectralnorm.c -o spectralnorm.compiled -lm
+  ```
+
 ## Run
 
-Run the following command **in the folder** `greenlab\experiment-runner`:
+#### Start Experiment
+Run the following command **in the folder** `greenlab/experiment-runner`:
 
 ```shell
 python experiment-runner/ examples/greenlab-profiling/RunnerConfig.py
@@ -125,3 +166,18 @@ or if you are using `python3` as the Python 3 alias:
 ```shell
 python3 experiment-runner/ examples/greenlab-profiling/RunnerConfig.py
 ```
+
+#### Data Merging
+Before merging, confirm that the name of the files to be merged have the corresponding index number.
+
+For example, we can merge the monsoon power consumption data(stored in `HV Output1.csv`) with the experiment-runner data(stored in `experiments/new_runner_experiment/run_table.csv`).
+
+But we cannot do so if the monsoon power consumption data is stored in `HV Output6.csv`, because their index number are not corresponding to each other.
+
+
+
+Run the folloiwng command in `greenlab/experiment-runner/examples/greenlab-profiling`
+```shell
+python CalPower.py
+```
+
